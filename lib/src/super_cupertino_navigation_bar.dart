@@ -202,7 +202,7 @@ class _SuperScaffoldState extends State<SuperScaffold> {
         child: Stack(
           children: [
             NestedScrollViewPlus(
-              physics: isScrollDisabled ? const NeverScrollableScrollPhysics() : SnapScrollPhysics(
+              physics: widget.isScrollDisabled ? const NeverScrollableScrollPhysics() : SnapScrollPhysics(
                 parent: const BouncingScrollPhysics(),
                 snaps: [
                   if (widget.appBar.searchBar!.scrollBehavior ==

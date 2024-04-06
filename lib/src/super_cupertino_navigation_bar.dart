@@ -24,6 +24,7 @@ class SuperScaffold extends StatefulWidget {
     this.onCollapsed,
     this.brightness,
     this.scrollController,
+    this.isScrollDisabled = false,
     this.transitionBetweenRoutes = true,
   }) : super(key: key) {
     measures = Measures(
@@ -46,6 +47,11 @@ class SuperScaffold extends StatefulWidget {
   ///
   /// Defaults to `true`.
   final bool stretch;
+
+  /// Whether the content is to small to scroll
+  ///
+  /// When set to `true`, the page will never scroll
+  final bool isScrollDisabled;
 
   /// {@template flutter.cupertino.CupertinoNavigationBar.transitionBetweenRoutes}
   /// Whether to transition between navigation bars.
@@ -196,7 +202,7 @@ class _SuperScaffoldState extends State<SuperScaffold> {
         child: Stack(
           children: [
             NestedScrollViewPlus(
-              physics: SnapScrollPhysics(
+              physics: isScrollDisabled ? const NeverScrollableScrollPhysics() : SnapScrollPhysics(
                 parent: const BouncingScrollPhysics(),
                 snaps: [
                   if (widget.appBar.searchBar!.scrollBehavior ==
